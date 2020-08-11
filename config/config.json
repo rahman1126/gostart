@@ -1,0 +1,33 @@
+{
+  "name": "GoStart",
+  "env": "dev",
+  "host": {
+    "address": "127.0.0.1",
+    "port": "8080"
+  },
+  "context": {
+    "timeout": 5
+  },
+  "database": {
+    "driver": "mysql",
+    "mysql": {
+      "host": "127.0.0.1",
+      "port": "3306",
+      "dbname": "gostart",
+      "username": "root",
+      "password": "root"
+    },
+    "postgree": {
+      "host": "127.0.0.1",
+      "port": "3306",
+      "dbname": "gostart",
+      "username": "root",
+      "password": "root"
+    }
+  },
+  "redis": {
+    "caching": true,
+    "address": "0.0.0.0",
+    "port": "6379"
+  }
+}
