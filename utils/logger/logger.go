@@ -9,29 +9,29 @@ func SetJSONLogger() {
 }
 
 func Trace(fields map[string]interface{}, args ...interface{}) {
-	log.WithFields(fields).Trace(args)
+	log.WithFields(fields).Trace(args...)
 }
 
 func Info(fields map[string]interface{}, args ...interface{}) {
-	log.WithFields(fields).Info(args)
+	log.WithFields(fields).Info(args...)
 }
 
 func Debug(fields map[string]interface{}, args ...interface{}) {
-	log.WithFields(fields).Debug(args)
+	log.WithFields(fields).Debug(args...)
 }
 
 func Warn(fields map[string]interface{}, args ...interface{}) {
-	log.WithFields(fields).Warn(args)
+	log.WithFields(fields).Warn(args...)
 }
 
 func Error(fields map[string]interface{}, args ...interface{}) {
-	log.WithFields(fields).Error(args)
+	log.WithFields(fields).Error(args...)
 }
 
 func Panic(fields map[string]interface{}, args ...interface{}) {
-	log.WithFields(fields).Panic(args)
+	log.WithFields(fields).Panic(args...)
 }
 
 func Fatal(fields map[string]interface{}, args ...interface{}) {
-	log.WithFields(fields).Fatal(args)
+	log.WithFields(fields).Fatal(args...)
 }

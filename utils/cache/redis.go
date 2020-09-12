@@ -9,15 +9,34 @@ import (
 	"log"
 )
 
-func Conn() redis.Conn {
+func Pool() redis.Conn {
 	if conf.IsUsingRedis() {
-		c, err := redis.Dial("tcp", conf.GetRedisAddr())
-		if err != nil {
-			logger.Error(nil,"cache.Conn: Connect to redis error", err)
-			return nil
+		pool := &redis.Pool{
+			MaxIdle:   80,
+			MaxActive: 12000,
+			Dial: func() (redis.Conn, error) {
+				c, err := redis.Dial("tcp", ":6379")
+				if err != nil {
+					//panic(err.Error())
+					return nil, err
+				}
+				return c, err
+			},
 		}
-		logger.Info(nil,"cache.Conn: Redis caching is on")
-		return c
+		return pool.Get()
+	}
+	return nil
+}
+
+func Ping(c redis.Conn) error {
+	if conf.IsUsingRedis() {
+		_, err := c.Do("PING")
+		if err != nil {
+			logger.Error(nil,"cache.Ping: Unable to PING redis", err)
+			return err
+		}
+		logger.Info(nil,"cache.Ping: Successfully PING redis")
+		return nil
 	}
 	return nil
 }

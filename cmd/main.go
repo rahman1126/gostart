@@ -21,15 +21,15 @@ func main() {
 	dbConn := db.DBConn()
 	defer dbConn.Close()
 
-	rConn := cache.Conn()
-	if rConn != nil {
-		defer rConn.Close()
+	redisConn := cache.Pool()
+	if conf.IsUsingRedis() {
+		defer redisConn.Close()
 	}
 
 	r := mux.NewRouter()
 
 	er := repository.NewExampleRepository(dbConn)
-	eu := usecase.NewExampleUsecase(er, conf.GetCtxTimeout(), rConn)
+	eu := usecase.NewExampleUsecase(er, conf.GetCtxTimeout(), redisConn)
 	delivery.NewHandler(eu, r)
 
 	server.GracefullyShutdown(r)

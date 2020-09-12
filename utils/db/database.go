@@ -6,6 +6,7 @@ import (
 	"gostart/utils/conf"
 	_ "github.com/jinzhu/gorm/dialects/mysql"
 	_ "github.com/jinzhu/gorm/dialects/postgres"
+	"time"
 )
 
 func DBConn() *gorm.DB {
@@ -32,6 +33,10 @@ func DBConn() *gorm.DB {
 	if err != nil {
 		panic(err)
 	}
+
+	db.DB().SetMaxIdleConns(10)
+	db.DB().SetMaxOpenConns(100)
+	db.DB().SetConnMaxLifetime(time.Hour)
 
 	return db
 }

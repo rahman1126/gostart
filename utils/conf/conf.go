@@ -16,6 +16,10 @@ func SetConfigFile(filepath, filename, filetype string) {
 	}
 }
 
+func GetString(str string) string {
+	return viper.GetString(fmt.Sprintf("%v", str))
+}
+
 func GetAppName() string {
 	return viper.GetString("name")
 }
